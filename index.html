@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Asistencia</title>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">emailjs.init('UOPE7-bdsurlv4D_7')</script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Asistencia en Línea - Clases de Matemáticas</h2>
+    <form id="form">
+        <div class="field">
+          <label for="nombre">Nombre</label>
+          <input type="text" name="nombre" id="nombre">
+        </div>
+        <div class="field">
+          <label for="problema">Problema</label>
+          <input type="text" name="problema" id="problema">
+        </div>
+        <div class="field">
+          <label for="correo">Correo</label>
+          <input type="text" name="correo" id="correo">
+        </div>
+      
+        <input type="submit" id="button" value="Send Email" >
+      </form>
+  </div>
+
+  <script>
+    const btn = document.getElementById('button');
+
+    document.getElementById('form')
+
+    .addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        btn.value = 'Sending...';
+
+        const serviceID = 'default_service';
+        const templateID = 'template_v5c57ev';
+
+        emailjs.sendForm(serviceID, templateID, this)
+        .then(() => {
+            btn.value = 'Send Email';
+            alert('Sent!');
+        }, (err) => {
+            btn.value = 'Send Email';
+            alert(JSON.stringify(err));
+        });
+    });
+  </script>
+</body>
+</html>
